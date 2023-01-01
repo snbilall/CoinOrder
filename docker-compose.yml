@@ -10,6 +10,16 @@ services:
         - SA_PASSWORD=Secret1234
     volumes:
         - '/var/opt/mssql'
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 5671:5671
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
   coinorderapi:
     image: ${DOCKER_REGISTRY-}coinorderapi
     build:
@@ -17,7 +27,9 @@ services:
       dockerfile: CoinOrderApi/Dockerfile
     depends_on:
         - db
+        - rabbitmq
     environment:
+      RabbitUrl: rabbitmq
       DbServer: "db"
       DbPort: "1433"
       DbUser: "SA"

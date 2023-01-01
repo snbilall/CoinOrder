@@ -7,20 +7,20 @@ namespace CoinOrderApi.Middlewares
 {
     public class ErrorHandlerMiddleware
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<ErrorHandlerMiddleware> _logger;
+        private readonly RequestDelegate next;
+        private readonly ILogger<ErrorHandlerMiddleware> logger;
 
         public ErrorHandlerMiddleware(RequestDelegate next,
             ILogger<ErrorHandlerMiddleware> logger)
         {
-            _next = next;
-            _logger = logger;
+            this.next = next;
+            this.logger = logger;
         }
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                await _next(context);
+                await next(context);
             }
             catch (Exception error)
             {
@@ -41,7 +41,7 @@ namespace CoinOrderApi.Middlewares
                 else
                 {
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    _logger.LogError(error, "System Exception");
+                    logger.LogError(error, "System Exception");
                     respMsg = JsonSerializer.Serialize(new { message = "System Exception, Please try again later" });
                 }
                 await response.WriteAsync(respMsg);

@@ -8,6 +8,7 @@
             services.AddScoped<EmailProvider>();
             services.AddScoped<SmsProvider>();
             services.AddScoped<PushNotificationProvider>();
+            services.AddScoped<RabbitMqProvider>();
         }
     }
 }

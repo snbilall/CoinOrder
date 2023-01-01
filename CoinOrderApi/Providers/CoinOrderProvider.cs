@@ -86,6 +86,20 @@ namespace CoinOrderApi.Providers
 
             context.Set<CoinOrder>().Add(coinOrder);
             await context.SaveChangesAsync();
+
+            List<Task> tasks = new List<Task>();
+
+            if (coinOrder.CommunicationPermission.Email)
+                tasks.Add(emailProvider.EnqueueEmail(coinOrder.EmailMessages.Last().Id));
+
+            if (coinOrder.CommunicationPermission.Sms)
+                tasks.Add(smsProvider.EnqueueSms(coinOrder.SmsMessages.Last().Id));
+
+            if (coinOrder.CommunicationPermission.PushNotification)
+                tasks.Add(pushNotificationProvider.EnqueuePush(coinOrder.PushNotificationMessages.Last().Id));
+
+            Task t = Task.WhenAll(tasks);
+            await t;
         }
 
         public async Task<CoinOrder?> GetAsync(int userId)
