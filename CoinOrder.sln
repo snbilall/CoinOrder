@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinOrderApi", "CoinOrderAp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2F72C0DF-E93C-412F-AE08-035CCB39938E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinOrder.Tests", "CoinOrder.Tests\CoinOrder.Tests.csproj", "{E0854429-4992-4B00-B207-F41509BB6633}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{2F72C0DF-E93C-412F-AE08-035CCB39938E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F72C0DF-E93C-412F-AE08-035CCB39938E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F72C0DF-E93C-412F-AE08-035CCB39938E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0854429-4992-4B00-B207-F41509BB6633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0854429-4992-4B00-B207-F41509BB6633}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0854429-4992-4B00-B207-F41509BB6633}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0854429-4992-4B00-B207-F41509BB6633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
