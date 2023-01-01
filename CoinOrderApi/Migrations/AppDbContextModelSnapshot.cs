@@ -31,7 +31,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OrderDate")
@@ -49,6 +49,8 @@ namespace CoinOrderApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedDate");
+
+                    b.HasIndex("DeletedDate");
 
                     b.HasIndex("Id");
 
@@ -69,7 +71,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Email")
@@ -88,6 +90,8 @@ namespace CoinOrderApi.Migrations
 
                     b.HasIndex("CoinOrderId")
                         .IsUnique();
+
+                    b.HasIndex("DeletedDate");
 
                     b.HasIndex("Id");
 
@@ -109,7 +113,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -131,6 +135,8 @@ namespace CoinOrderApi.Migrations
 
                     b.HasIndex("CoinOrderId");
 
+                    b.HasIndex("DeletedDate");
+
                     b.HasIndex("Id");
 
                     b.ToTable("EmailMessage");
@@ -145,7 +151,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Message")
@@ -164,6 +170,8 @@ namespace CoinOrderApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DeletedDate");
 
                     b.HasIndex("Id");
 
@@ -185,7 +193,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EnqueuedAt")
@@ -207,6 +215,8 @@ namespace CoinOrderApi.Migrations
 
                     b.HasIndex("CoinOrderId");
 
+                    b.HasIndex("DeletedDate");
+
                     b.HasIndex("Id");
 
                     b.ToTable("PushNotificationMessages");
@@ -224,7 +234,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EnqueuedAt")
@@ -245,6 +255,8 @@ namespace CoinOrderApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CoinOrderId");
+
+                    b.HasIndex("DeletedDate");
 
                     b.HasIndex("Id");
 

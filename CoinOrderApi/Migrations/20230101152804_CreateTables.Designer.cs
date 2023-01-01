@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoinOrderApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230101123855_CreateTables")]
+    [Migration("20230101152804_CreateTables")]
     partial class CreateTables
     {
         /// <inheritdoc />

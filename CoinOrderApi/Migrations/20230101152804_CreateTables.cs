@@ -1,4 +1,5 @@
 ﻿using System;
+using CoinOrderApi.Data.Models;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -45,6 +46,22 @@ namespace CoinOrderApi.Migrations
                 {
                     table.PrimaryKey("PK_MessageTemplate", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+            table: "MessageTemplate",
+            columns: new[] { "Id", "Type", "ProcessType", "Title", "Message", "CreatedDate", "UpdatedDate", "DeletedDate" },
+            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.Email, (int)MessageProcessType.CoinPurchased, "Talimat Başarıyla Verildi!", "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, DateTime.Now });
+
+            migrationBuilder.InsertData(
+            table: "MessageTemplate",
+            columns: new[] { "Id", "Type", "ProcessType", "Title", "Message", "CreatedDate", "UpdatedDate", "DeletedDate" },
+            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.PushNotification, (int)MessageProcessType.CoinPurchased, "Talimat Başarıyla Verildi!", "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, DateTime.Now });
+
+            migrationBuilder.InsertData(
+            table: "MessageTemplate",
+            columns: new[] { "Id", "Type", "ProcessType", "Title", "Message", "CreatedDate", "UpdatedDate", "DeletedDate" },
+            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.Sms, (int)MessageProcessType.CoinPurchased, null, "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, DateTime.Now });
+
 
             migrationBuilder.CreateTable(
                 name: "CommunicationPermission",

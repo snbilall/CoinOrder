@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoinOrderApp.DtoModels.Request
 {
-    public class CreatePurchaseRequest
+    public class CreateOrderRequest
     {
         [Required]
         [JsonProperty("price")]
@@ -26,13 +26,13 @@ namespace CoinOrderApp.DtoModels.Request
             int dayOfMonth = OrderDate.Day;
 
             if (OrderDate < DateTime.Now)
-                throw new ValidationException("Bugünün tarihinden öncesine talimat veremezsiniz!");
+                throw new ValidationException("Order date cannat be less than today!");
 
             if (dayOfMonth < firstDayOfMonthToOrder || dayOfMonth > lastDayOfMonthToOrder)
-                throw new ValidationException("Bu tarihe talimat veremezsiniz!");
+                throw new ValidationException("You cannot order that day!");
             
             if (Price < minOrderablePrice || Price > maxOrderablePrice)
-                throw new ValidationException($"Miktar {minOrderablePrice} - {maxOrderablePrice} TL arası olmalıdır!");
+                throw new ValidationException($"Price should be in range {minOrderablePrice} - {maxOrderablePrice} TL!");
         }
     }
 
