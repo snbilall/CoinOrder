@@ -50,17 +50,17 @@ namespace CoinOrderApi.Migrations
             migrationBuilder.InsertData(
             table: "MessageTemplate",
             columns: new[] { "Id", "Type", "ProcessType", "Title", "Message", "CreatedDate", "UpdatedDate", "DeletedDate" },
-            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.Email, (int)MessageProcessType.CoinPurchased, "Talimat Başarıyla Verildi!", "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, DateTime.Now });
+            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.Email, (int)MessageProcessType.CoinPurchased, "Talimat Başarıyla Verildi!", "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, null });
 
             migrationBuilder.InsertData(
             table: "MessageTemplate",
             columns: new[] { "Id", "Type", "ProcessType", "Title", "Message", "CreatedDate", "UpdatedDate", "DeletedDate" },
-            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.PushNotification, (int)MessageProcessType.CoinPurchased, "Talimat Başarıyla Verildi!", "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, DateTime.Now });
+            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.PushNotification, (int)MessageProcessType.CoinPurchased, "Talimat Başarıyla Verildi!", "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, null });
 
             migrationBuilder.InsertData(
             table: "MessageTemplate",
             columns: new[] { "Id", "Type", "ProcessType", "Title", "Message", "CreatedDate", "UpdatedDate", "DeletedDate" },
-            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.Sms, (int)MessageProcessType.CoinPurchased, null, "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, DateTime.Now });
+            values: new object[] { Guid.NewGuid(), (int)MessageTemplateType.Sms, (int)MessageProcessType.CoinPurchased, null, "<value> tutarlı talimatınız başarıyla verildi!", DateTime.Now, DateTime.Now, null });
 
 
             migrationBuilder.CreateTable(
@@ -98,8 +98,8 @@ namespace CoinOrderApi.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EnqueuedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EnqueuedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CoinOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -124,8 +124,8 @@ namespace CoinOrderApi.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EnqueuedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EnqueuedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CoinOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -149,8 +149,8 @@ namespace CoinOrderApi.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EnqueuedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EnqueuedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CoinOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>

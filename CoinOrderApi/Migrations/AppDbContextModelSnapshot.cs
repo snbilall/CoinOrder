@@ -119,10 +119,10 @@ namespace CoinOrderApi.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EnqueuedAt")
+                    b.Property<DateTime?>("EnqueuedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("SentAt")
+                    b.Property<DateTime?>("SentAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Subject")
@@ -196,13 +196,13 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EnqueuedAt")
+                    b.Property<DateTime?>("EnqueuedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ReceiverId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SentAt")
+                    b.Property<DateTime?>("SentAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -237,7 +237,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EnqueuedAt")
+                    b.Property<DateTime?>("EnqueuedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Message")
@@ -246,7 +246,7 @@ namespace CoinOrderApi.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SentAt")
+                    b.Property<DateTime?>("SentAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedDate")

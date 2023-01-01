@@ -30,7 +30,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer($"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=True")
 );
 
-builder.Services.AddScoped<CoinOrderProvider>();
+builder.Services.AddProviders();
 
 var app = builder.Build();
 
