@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  db:
+    image: 'mcr.microsoft.com/mssql/server'
+    ports:
+        - '1433:1433'
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Secret1234
+    volumes:
+        - '/var/opt/mssql'
+  coinorderapi:
+    image: ${DOCKER_REGISTRY-}coinorderapi
+    build:
+      context: .
+      dockerfile: CoinOrderApi/Dockerfile
+    depends_on:
+        - db
+    environment:
+      DbServer: "db"
+      DbPort: "1433"
+      DbUser: "SA"
+      Password: "Secret1234"
+      Database: "OrderAppDb"
