@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinOrderApi", "CoinOrderApi\CoinOrderApi.csproj", "{83A269B9-D757-4A31-8B81-96F0AD28CAC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinOrderApi", "CoinOrderApi\CoinOrderApi.csproj", "{83A269B9-D757-4A31-8B81-96F0AD28CAC0}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2F72C0DF-E93C-412F-AE08-035CCB39938E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinOrderApi.Tests", "CoinOrderApi.Tests\CoinOrderApi.Tests.csproj", "{97456FAF-BD39-41CC-BB46-50A00B1A23FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2F72C0DF-E93C-412F-AE08-035CCB39938E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F72C0DF-E93C-412F-AE08-035CCB39938E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F72C0DF-E93C-412F-AE08-035CCB39938E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97456FAF-BD39-41CC-BB46-50A00B1A23FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97456FAF-BD39-41CC-BB46-50A00B1A23FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97456FAF-BD39-41CC-BB46-50A00B1A23FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97456FAF-BD39-41CC-BB46-50A00B1A23FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -37,7 +37,10 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetService<AppDbContext>();
-    context.Database.Migrate();
+    if (context?.Database.IsRelational() == true)
+    {
+        context.Database.Migrate();
+    }
 }
 
 // Configure the HTTP request pipeline.
@@ -55,3 +58,5 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
