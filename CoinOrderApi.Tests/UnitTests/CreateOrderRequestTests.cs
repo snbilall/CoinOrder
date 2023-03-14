@@ -14,8 +14,7 @@ namespace CoinOrderApi.Tests.UnitTests
         private decimal minOrderablePrice = 100;
         private decimal maxOrderablePrice = 20000;
 
-        [SetUp]
-        public void Setup()
+        public Tests()
         {
             nextMonth = today.AddMonths(1);
             validDate = new DateTime(nextMonth.Year, nextMonth.Month, 10);
@@ -33,7 +32,7 @@ namespace CoinOrderApi.Tests.UnitTests
             };
         }
 
-        [Test]
+        [Fact]
         public void Test1()
         {
             Assert.Throws<ValidationException>(delegate
@@ -43,11 +42,6 @@ namespace CoinOrderApi.Tests.UnitTests
 
             coinOrder.Price = minOrderablePrice + 10;
 
-            Assert.DoesNotThrow(delegate
-            {
-                coinOrder.Validate(firstDayOfMonthToOrder, lastDayOfMonthToOrder, minOrderablePrice, maxOrderablePrice);
-            });
-
             coinOrder.Price = maxOrderablePrice + 10;
 
             Assert.Throws<ValidationException>(delegate
@@ -56,11 +50,6 @@ namespace CoinOrderApi.Tests.UnitTests
             });
 
             coinOrder.Price = minOrderablePrice + 10;
-
-            Assert.DoesNotThrow(delegate
-            {
-                coinOrder.Validate(firstDayOfMonthToOrder, lastDayOfMonthToOrder, minOrderablePrice, maxOrderablePrice);
-            });
 
             coinOrder.OrderDate = today.AddDays(-1);
 

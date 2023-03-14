@@ -3,6 +3,7 @@ using CoinOrderApp.DtoModels.Response;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Json;
+using Xunit;
 
 namespace CoinOrderApi.Tests.IntegrationTests
 {
@@ -14,14 +15,13 @@ namespace CoinOrderApi.Tests.IntegrationTests
         private DateTime nextMonth;
         private DateTime validDate;
 
-        [SetUp]
-        public void SetUp()
+        public OrderServicesTests(CoinOrderApplicationFactory factory) : base(factory)
         {
             nextMonth = today.AddMonths(1);
             validDate = new DateTime(nextMonth.Year, nextMonth.Month, 1);
-    }
+        }
 
-        [Test]
+        [Fact]
         public async Task TestCreateCoinOrder()
         {
             var coinOrder = new CreateOrderRequest
@@ -37,11 +37,11 @@ namespace CoinOrderApi.Tests.IntegrationTests
                 }
             };
             var response = await ServiceCalls.CreateOrder(client, JsonConvert.SerializeObject(coinOrder));
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
+            Assert.NotNull(response);
+            Assert.True(response.StatusCode == HttpStatusCode.Created);
         }
 
-        [Test]
+        [Fact]
         public async Task TestDuplicateCreateCoinOrderFail()
         {
             var coinOrder = new CreateOrderRequest
@@ -57,43 +57,43 @@ namespace CoinOrderApi.Tests.IntegrationTests
                 }
             };
             var response = await ServiceCalls.CreateOrder(client, JsonConvert.SerializeObject(coinOrder));
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.Conflict);
+            Assert.NotNull(response);
+            Assert.True(response.StatusCode == HttpStatusCode.Conflict);
         }
 
-        [Test]
+        [Fact]
         public async Task TestGetCreateCoinOrder()
         {
             var response = await ServiceCalls.GetOrder(client, userId);
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);
+            Assert.NotNull(response);
+            Assert.True(response.StatusCode == HttpStatusCode.OK);
             var body = await response.Content.ReadFromJsonAsync<GetOrderResponse>();
-            Assert.IsNotNull(body);
-            Assert.AreEqual(body.OrderDate, validDate);
-            Assert.AreEqual(body.Price, price);
-            Assert.IsNotNull(body.Id);
+            Assert.NotNull(body);
+            Assert.Equal(body.OrderDate, validDate);
+            Assert.Equal(body.Price, price);
+            Assert.NotNull(body.Id);
         }
 
-        [Test]
+        [Fact]
         public async Task TestGetOrderCommunicationPermissions()
         {
             var response = await ServiceCalls.GetOrder(client, userId);
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);
+            Assert.NotNull(response);
+            Assert.True(response.StatusCode == HttpStatusCode.OK);
             var bodyOfGet = await response.Content.ReadFromJsonAsync<GetOrderResponse>();
-            Assert.IsNotNull(bodyOfGet);
-            Assert.IsNotNull(bodyOfGet.Id);
+            Assert.NotNull(bodyOfGet);
+            Assert.NotNull(bodyOfGet.Id);
             response = await ServiceCalls.OrderCommunicationPermissions(client, bodyOfGet.Id);
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);
+            Assert.NotNull(response);
+            Assert.True(response.StatusCode == HttpStatusCode.OK);
             var bodyOfPermissions = await response.Content.ReadFromJsonAsync<List<string>>();
-            Assert.IsNotNull(bodyOfPermissions);
-            Assert.IsTrue(bodyOfPermissions.Count == 2);
-            Assert.IsTrue(bodyOfPermissions.Contains("Push Notification"));
-            Assert.IsTrue(bodyOfPermissions.Contains("Email"));
+            Assert.NotNull(bodyOfPermissions);
+            Assert.True(bodyOfPermissions.Count == 2);
+            Assert.True(bodyOfPermissions.Contains("Push Notification"));
+            Assert.True(bodyOfPermissions.Contains("Email"));
         }
 
-        [Test]
+        [Fact]
         public async Task TestDeleteCoinOrder()
         {
             var uId = 3;
@@ -110,11 +110,11 @@ namespace CoinOrderApi.Tests.IntegrationTests
                 }
             };
             var responseCreate = await ServiceCalls.CreateOrder(client, JsonConvert.SerializeObject(coinOrder));
-            Assert.IsNotNull(responseCreate);
-            Assert.IsTrue(responseCreate.StatusCode == HttpStatusCode.Created);
+            Assert.NotNull(responseCreate);
+            Assert.True(responseCreate.StatusCode == HttpStatusCode.Created);
             var response = await ServiceCalls.DeleteOrder(client, uId);
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);
+            Assert.NotNull(response);
+            Assert.True(response.StatusCode == HttpStatusCode.OK);
         }
     }
 }

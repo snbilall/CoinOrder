@@ -1,17 +1,21 @@
 ﻿using CoinOrderApi.Data;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace CoinOrderApi.Tests.IntegrationTests
 {
-    public class IntegrationTestsBase
+    public class IntegrationTestsBase : IClassFixture<CoinOrderApplicationFactory>
     {
         public HttpClient client;
-        public AppDbContext context;
+        public readonly CoinOrderApplicationFactory Factory;
+        public readonly AppDbContext DbContext;
 
-        public IntegrationTestsBase()
+        public IntegrationTestsBase(CoinOrderApplicationFactory factory)
         {
-            var application = new CoinOrderApplicationFactory();
-            client = application.CreateClient();
+            Factory = factory;
+            var scope = factory.Services.CreateScope();
+            DbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            client = Factory.CreateClient();
         }
     }
 }
