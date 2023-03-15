@@ -39,6 +39,7 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetService<AppDbContext>();
     if (context?.Database.IsRelational() == true)
     {
+        //context.Database.EnsureCreated();
         context.Database.Migrate();
     }
 }

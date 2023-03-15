@@ -28,6 +28,7 @@ public class CoinOrderApplicationFactory : WebApplicationFactory<Program>, IAsyn
             .WithEnvironment("ACCEPT_EULA", "Y")
             .WithEnvironment("SA_PASSWORD", "Secret1234")
             .WithCleanUp(true)
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(1433))
             .Build();
     }
 
@@ -74,7 +75,26 @@ public class CoinOrderApplicationFactory : WebApplicationFactory<Program>, IAsyn
         });
     }
 
-    public async Task InitializeAsync() => await _container.StartAsync();
+    public async Task InitializeAsync()
+    {
+        await _container.StartAsync().ConfigureAwait(true);
+
+        //var thing = true;
+        //while (thing)
+        //{
+        //    _container.Created += (object? sender, EventArgs e) =>
+        //    {
+        //        thing = false;
+        //    };
+        //    _container.Started += (object? sender, EventArgs e) =>
+        //    {
+        //        thing = false;
+        //    };
+        //}
+
+        //Thread.Sleep(3000);
+        //Console.WriteLine("Continue");
+    }
 
     async Task IAsyncLifetime.DisposeAsync()
     {

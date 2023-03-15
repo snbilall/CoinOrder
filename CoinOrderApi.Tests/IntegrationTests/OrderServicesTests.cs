@@ -7,6 +7,7 @@ using Xunit;
 
 namespace CoinOrderApi.Tests.IntegrationTests
 {
+    [Collection("Sequential")]
     public class OrderServicesTests : IntegrationTestsBase
     {
         private int userId = 1;
