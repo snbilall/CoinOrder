@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace CoinOrderApi.Providers
 {
-    public class CoinOrderProvider
+    public class CoinOrderProvider : ICoinOrderProvider
     {
         private readonly AppDbContext context;
         private readonly IOptions<AppConfig> options;
@@ -30,8 +30,7 @@ namespace CoinOrderApi.Providers
 
         public async Task CreateAsync(CreateOrderRequest request)
         {
-            bool userHasActiveOrder = context.Set<CoinOrder>().Where(x => x.DeletedDate == null && x.UserId== request.UserId).Any();
-            if (userHasActiveOrder) throw new UserHasActiveOrderException();
+            if (await HasOrderAsync(request.UserId)) throw new UserHasActiveOrderException();
 
             request.Validate(
                 options.Value.FirstDayOfMonthToOrder,
@@ -105,6 +104,11 @@ namespace CoinOrderApi.Providers
         public async Task<CoinOrder?> GetAsync(int userId)
         {
             return await context.Set<CoinOrder>().FirstOrDefaultAsync(x => x.DeletedDate == null && x.UserId == userId);
+        }
+
+        public async Task<bool> HasOrderAsync(int userId)
+        {
+            return await context.Set<CoinOrder>().AnyAsync(x => x.DeletedDate == null && x.UserId == userId);
         }
 
         public async Task DeleteAsync(int userId)

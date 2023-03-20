@@ -1,21 +1,37 @@
 ﻿using CoinOrderApi.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+using NUnit.Framework;
 
 namespace CoinOrderApi.Tests.IntegrationTests
 {
-    public class IntegrationTestsBase : IClassFixture<CoinOrderApplicationFactory>
+    [SetUpFixture]
+    [FixtureLifeCycle(LifeCycle.SingleInstance)]
+    public class IntegrationTestsBase
     {
-        public HttpClient client;
-        public readonly CoinOrderApplicationFactory Factory;
-        public readonly AppDbContext DbContext;
-
-        public IntegrationTestsBase(CoinOrderApplicationFactory factory)
+        [OneTimeSetUp]
+        public async Task GlobalSetup()
         {
-            Factory = factory;
+            CoinOrderApplicationFactory factory = new CoinOrderApplicationFactory();
+            Progr.Factory = factory;
+            await factory.Container.StartAsync();
             var scope = factory.Services.CreateScope();
-            DbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            client = Factory.CreateClient();
+            Progr.DbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+
+            Progr.client = Progr.Factory.CreateClient();
+        }
+
+        [OneTimeTearDown]
+        public async Task GlobalTearDown()
+        {
+            await Progr.Factory.Container.StopAsync();
         }
     }
+
+    public static class Progr
+    {
+        public static HttpClient client { get; set; }
+        public static CoinOrderApplicationFactory Factory { get; set; }
+        public static AppDbContext DbContext { get; set; }
+}
 }

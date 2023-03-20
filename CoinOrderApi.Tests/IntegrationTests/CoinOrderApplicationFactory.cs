@@ -11,17 +11,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Xunit;
 
 namespace CoinOrderApi.Tests.IntegrationTests;
 
-public class CoinOrderApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
+public class CoinOrderApplicationFactory : WebApplicationFactory<Program>
 {
-    private IContainer _container;
+    public IContainer Container;
 
     public CoinOrderApplicationFactory()
     {
-        _container = new ContainerBuilder()
+        Container = new ContainerBuilder()
             .WithImage("mcr.microsoft.com/mssql/server")
             .WithExposedPort(1433)
             .WithPortBinding(1434, 1433)
@@ -39,7 +38,7 @@ public class CoinOrderApplicationFactory : WebApplicationFactory<Program>, IAsyn
             services.RemoveAll(typeof(DbContextOptions<AppDbContext>));
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer($"Server={_container.Hostname}, 1434;Initial Catalog=OrderAppDb;User ID=SA;Password=Secret1234;TrustServerCertificate=True;").EnableDetailedErrors().EnableSensitiveDataLogging();
+                options.UseSqlServer($"Server={Container.Hostname}, 1434;Initial Catalog=OrderAppDb;User ID=SA;Password=Secret1234;TrustServerCertificate=True;").EnableDetailedErrors().EnableSensitiveDataLogging();
             });
             var sp = services.BuildServiceProvider();
 
@@ -75,29 +74,29 @@ public class CoinOrderApplicationFactory : WebApplicationFactory<Program>, IAsyn
         });
     }
 
-    public async Task InitializeAsync()
-    {
-        await _container.StartAsync().ConfigureAwait(true);
+    //public async Task InitializeAsync()
+    //{
+    //    await _container.StartAsync().ConfigureAwait(true);
 
-        //var thing = true;
-        //while (thing)
-        //{
-        //    _container.Created += (object? sender, EventArgs e) =>
-        //    {
-        //        thing = false;
-        //    };
-        //    _container.Started += (object? sender, EventArgs e) =>
-        //    {
-        //        thing = false;
-        //    };
-        //}
+    //    //var thing = true;
+    //    //while (thing)
+    //    //{
+    //    //    _container.Created += (object? sender, EventArgs e) =>
+    //    //    {
+    //    //        thing = false;
+    //    //    };
+    //    //    _container.Started += (object? sender, EventArgs e) =>
+    //    //    {
+    //    //        thing = false;
+    //    //    };
+    //    //}
 
-        //Thread.Sleep(3000);
-        //Console.WriteLine("Continue");
-    }
+    //    //Thread.Sleep(3000);
+    //    //Console.WriteLine("Continue");
+    //}
 
-    async Task IAsyncLifetime.DisposeAsync()
-    {
-        await _container.DisposeAsync();
-    }
+    //async Task IAsyncLifetime.DisposeAsync()
+    //{
+    //    await _container.DisposeAsync();
+    //}
 }

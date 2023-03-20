@@ -1,4 +1,5 @@
 using CoinOrderApp.DtoModels.Request;
+using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoinOrderApi.Tests.UnitTests
@@ -32,7 +33,7 @@ namespace CoinOrderApi.Tests.UnitTests
             };
         }
 
-        [Fact]
+        [Test]
         public void Test1()
         {
             Assert.Throws<ValidationException>(delegate

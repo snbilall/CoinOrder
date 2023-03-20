@@ -4,7 +4,7 @@
     {
         public static void AddProviders(this IServiceCollection services)
         {
-            services.AddScoped<CoinOrderProvider>();
+            services.AddScoped<ICoinOrderProvider, CoinOrderProvider>();
             services.AddScoped<EmailProvider>();
             services.AddScoped<SmsProvider>();
             services.AddScoped<PushNotificationProvider>();

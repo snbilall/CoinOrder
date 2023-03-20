@@ -11,8 +11,8 @@ namespace CoinOrderApi.Controllers
     [Route("coin-orders")]
     public class CoinOrdersController : Controller
     {
-        private CoinOrderProvider coinOrderProvider;
-        public CoinOrdersController(CoinOrderProvider coinOrderProvider)
+        private ICoinOrderProvider coinOrderProvider;
+        public CoinOrdersController(ICoinOrderProvider coinOrderProvider)
         {
             this.coinOrderProvider = coinOrderProvider;
         }

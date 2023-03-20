@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinOrderApi", "CoinOrderAp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2F72C0DF-E93C-412F-AE08-035CCB39938E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinOrderApi.Tests", "CoinOrderApi.Tests\CoinOrderApi.Tests.csproj", "{97456FAF-BD39-41CC-BB46-50A00B1A23FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinOrderApi.Tests", "CoinOrderApi.Tests\CoinOrderApi.Tests.csproj", "{97456FAF-BD39-41CC-BB46-50A00B1A23FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
