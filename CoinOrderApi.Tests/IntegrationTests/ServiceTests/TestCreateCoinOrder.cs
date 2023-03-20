@@ -1,4 +1,6 @@
-﻿using CoinOrderApp.DtoModels.Request;
+﻿using CoinOrderApi.Data.Models;
+using CoinOrderApp.DtoModels.Request;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -41,6 +43,9 @@ namespace CoinOrderApi.Tests.IntegrationTests.ServiceTests
             var response = await ServiceCalls.CreateOrder(Progr.client, JsonConvert.SerializeObject(coinOrder));
             Assert.NotNull(response);
             Assert.True(response.StatusCode == HttpStatusCode.Created);
+
+            var dbOrder = await Progr.DbContext.Set<CoinOrder>().FirstOrDefaultAsync(x => x.UserId == userId);
+            Assert.NotNull(dbOrder);
 
             var duplicateCoinOrder = new CreateOrderRequest
             {
